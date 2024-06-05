@@ -1,11 +1,11 @@
 {
-  "id": "dev.replugged.PluginTemplate",
-  "name": "Plugin Template",
-  "description": "A plugin template",
+  "id": "dev.lisekilis.RepluggedOsu",
+  "name": "Replugged Osu",
+  "description": "A plugin that allows you to get osu information",
   "author": {
-    "name": "replugged",
-    "discordID": "1000992611840049192",
-    "github": "replugged-org"
+    "name": "lisekilis",
+    "discordID": "396990201790201857",
+    "github": "lisekilis"
   },
   "version": "1.0.0",
   "updater": {
@@ -15,6 +15,6 @@
   "license": "MIT",
   "type": "replugged-plugin",
   "renderer": "src/index.ts",
-  "source": "https://github.com/replugged-org/plugin-template",
-  "image": ["https://i.imgur.com/14CNs3a.png?CHANGE-THIS-URL"]
+  "source": "https://github.com/lisekilis/Replugged-Osu",
+  "image": ["http://scheibo.com"]
 }
