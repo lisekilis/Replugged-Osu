@@ -28,13 +28,27 @@ export async function start(): Promise<void> {
       const send = interaction.getValue("Send");
 
       try {
-        const user = await osuAPI.getUser(userName); // Await the promise
-
-        // Handle successful user retrieval
-        return {
-          send: send ? true : false,
-          result: `User found! Username: ${user.username}`, // Use user data
-        };
+        const user = await osuAPI.getUser(userName);
+        if (send)
+          return {
+            send: true,
+            result: `## [${user?.username}](https://osu.ppy.sh/users/${user?.id})
+            PP: ${user?.statistics.pp}
+            Score: ${user?.statistics.ranked_score}`,
+          };
+        else
+          return {
+            send: false,
+            embeds: [
+              {
+                color: 0xe089b6,
+                title: `${user?.username}`,
+                url: `https://osu.ppy.sh/users/${user?.id}`,
+                description: `PP: ${user?.statistics.pp}
+              Score: ${user?.statistics.ranked_score}`,
+              },
+            ],
+          };
       } catch (error) {
         logger.error("Error fetching user:", error);
         return {
