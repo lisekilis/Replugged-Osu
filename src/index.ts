@@ -67,7 +67,7 @@ export async function start(): Promise<void> {
                 description: `PP: ${osuUser?.statistics.pp}
                 Score: ${osuUser?.statistics.ranked_score}
                 `,
-                timestamp: osuUser?.is_online ? new Date(osuUser.last_visit).valueOf() : null,
+                timestamp: osuUser?.is_online ? null : new Date(osuUser.last_visit).valueOf(),
                 footer: {
                   text: osuUser?.is_online ? "Online" : "Last Seen", //TODO: add status icons
                 },
