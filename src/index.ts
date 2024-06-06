@@ -29,41 +29,48 @@ export async function start(): Promise<void> {
 
       try {
         logger.log();
-        const user = await osuAPI.getUser(userName);
-        const status = user?.is_online
-          ? `Currently online 🟢`
-          : `Last Seen <t:${new Date(user?.last_visit).valueOf()}:R>`;
-        const discord = user?.discord ? common.users.findByTag(user.discord.split("#")[0]) : null;
+        const osuUser = await osuAPI.getUser(userName);
+        const status = osuUser?.is_online
+          ? `🟢 Currently online `
+          : `⚫ Last Seen <t:${new Date(osuUser?.last_visit).valueOf()}:R>`;
+        const discordUser = osuUser?.discord
+          ? common.users.findByTag(osuUser.discord.split("#")[0])
+          : null;
         if (send)
           return {
             send: true,
-            result: `## [${user?.username}](https://osu.ppy.sh/users/${user?.id})
-            ### PP: ${user?.statistics.pp}
-            ### Score: ${user?.statistics.ranked_score}`,
+            result: `## [${osuUser?.username}](https://osu.ppy.sh/users/${osuUser?.id})
+            ### PP: ${osuUser?.statistics.pp}
+            ### Score: ${osuUser?.statistics.ranked_score}`,
           };
         else
           return {
             send: false,
             embeds: [
               {
-                color: 0xe089b6,
-                author: discord
+                color: 0xff79b8,
+                author: discordUser
                   ? {
-                      name: discord.username,
+                      name: discordUser.username,
                       // eslint-disable-next-line @typescript-eslint/naming-convention
-                      proxy_icon_url: `https://cdn.discordapp.com/avatars/${discord.id}/${discord.avatar}.png`,
-                      url: `${common.api.getAPIBaseURL().split("api")[0]}users/${discord.id}`,
+                      proxy_icon_url: `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`,
+                      url: `${window.location.origin}users/${discordUser.id}`,
                     }
                   : null,
-                title: user?.username,
+                title: osuUser?.username,
                 thumbnail: {
-                  url: user?.avatar_url, //doesn't work for some reason
+                  url: osuUser?.avatar_url, //doesn't work for some reason
+                  width: 50,
+                  height: 50,
                 },
-                url: `https://osu.ppy.sh/users/${user?.id}`,
-                description: `${status}
-                PP: ${user?.statistics.pp}
-              Score: ${user?.statistics.ranked_score}
-              `,
+                url: `https://osu.ppy.sh/users/${osuUser?.id}`,
+                description: `PP: ${osuUser?.statistics.pp}
+                Score: ${osuUser?.statistics.ranked_score}
+                `,
+                timestamp: osuUser?.is_online ? new Date(osuUser.last_visit).valueOf() : null,
+                footer: {
+                  text: osuUser?.is_online ? "Online" : "Last Seen", //TODO: add status icons
+                },
               },
             ],
           };
