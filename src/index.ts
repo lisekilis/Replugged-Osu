@@ -1,4 +1,4 @@
-import { Injector, Logger, types } from "replugged";
+import { Injector, Logger, types, common } from "replugged";
 import * as osuAPI from "./osuAPI";
 
 const inject = new Injector();
@@ -7,7 +7,7 @@ const { ApplicationCommandOptionType } = types;
 
 export async function start(): Promise<void> {
   inject.utils.registerSlashCommand({
-    name: "OsuUser",
+    name: "osuUser",
     description: "allows you to look up an Osu! user",
     options: [
       {
@@ -28,13 +28,18 @@ export async function start(): Promise<void> {
       const send = interaction.getValue("Send");
 
       try {
+        logger.log();
         const user = await osuAPI.getUser(userName);
+        const status = user?.is_online
+          ? `Currently online 🟢`
+          : `Last Seen <t:${new Date(user?.last_visit).valueOf()}:R>`;
+        const discord = user?.discord ? common.users.findByTag(user.discord.split("#")[0]) : null;
         if (send)
           return {
             send: true,
             result: `## [${user?.username}](https://osu.ppy.sh/users/${user?.id})
-            PP: ${user?.statistics.pp}
-            Score: ${user?.statistics.ranked_score}`,
+            ### PP: ${user?.statistics.pp}
+            ### Score: ${user?.statistics.ranked_score}`,
           };
         else
           return {
@@ -42,10 +47,23 @@ export async function start(): Promise<void> {
             embeds: [
               {
                 color: 0xe089b6,
-                title: `${user?.username}`,
+                author: discord
+                  ? {
+                      name: discord.username,
+                      // eslint-disable-next-line @typescript-eslint/naming-convention
+                      proxy_icon_url: `https://cdn.discordapp.com/avatars/${discord.id}/${discord.avatar}.png`,
+                      url: `${common.api.getAPIBaseURL().split("api")[0]}users/${discord.id}`,
+                    }
+                  : null,
+                title: user?.username,
+                thumbnail: {
+                  url: user?.avatar_url, //doesn't work for some reason
+                },
                 url: `https://osu.ppy.sh/users/${user?.id}`,
-                description: `PP: ${user?.statistics.pp}
-              Score: ${user?.statistics.ranked_score}`,
+                description: `${status}
+                PP: ${user?.statistics.pp}
+              Score: ${user?.statistics.ranked_score}
+              `,
               },
             ],
           };
