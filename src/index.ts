@@ -143,8 +143,8 @@ export async function start(): Promise<void> {
               footer: {
                 text: osuUser.is_online ? "Online" : "Last Seen", //TODO: add status icons
                 icon_url: osuUser.is_online
-                  ? "https://tenor.com/view/niko-oneshot-ballin-teste-niko-ballin-gif-26110464"
-                  : "https://tenor.com/view/ultrakill-gif-26495714",
+                  ? "https://raw.githubusercontent.com/lisekilis/Replugged-Osu/main/assets/user-status-icon-online.png"
+                  : "https://raw.githubusercontent.com/lisekilis/Replugged-Osu/main/assets/user-status-icon-offline.png",
               },
               type: "rich",
             },
