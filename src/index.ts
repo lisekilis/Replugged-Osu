@@ -86,10 +86,10 @@ export async function start(): Promise<void> {
                   inline: true,
                 },
               ],
-              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-              timestamp: osuUser.is_online ?? osuUser.last_visit,
+              // eslint-disable-next-line no-undefined
+              timestamp: osuUser.is_online ? undefined : osuUser.last_visit,
               footer: {
-                text: osuUser.is_online ? "Online" : "Last Seen", // broken
+                text: osuUser.is_online ? "Online" : "Last Seen",
                 // eslint-disable-next-line @typescript-eslint/naming-convention
                 icon_url: osuUser.is_online
                   ? "https://raw.githubusercontent.com/lisekilis/Replugged-Osu/main/assets/user-status-icon-online.png"
