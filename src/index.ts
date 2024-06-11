@@ -64,7 +64,7 @@ export async function start(): Promise<void> {
               },
               title: osuUser.username,
               thumbnail: {
-                url: osuUser.avatar_url, //doesn't work for some reason
+                url: osuUser.avatar_url,
                 width: 50,
                 height: 50,
               },
@@ -81,15 +81,15 @@ export async function start(): Promise<void> {
                   inline: true,
                 },
                 {
-                  name: `Ranking🗺️ [⛰️] (${getRegionalFlag(osuUser.country.code)})`,
-                  value: `#${osuUser.statistics.global_rank} [#${osuUser.rank_highest.rank}] (#${osuUser.statistics.country_rank}) `,
+                  name: `Ranking (🌐) <⛰️> [${getRegionalFlag(osuUser.country.code)}]`,
+                  value: `(#${osuUser.statistics.global_rank}) \\<#${osuUser.rank_highest.rank}> [#${osuUser.statistics.country_rank}]`,
                   inline: true,
                 },
               ],
               // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
               timestamp: osuUser.is_online ?? osuUser.last_visit,
               footer: {
-                text: osuUser.is_online ? "Online" : "Last Seen",
+                text: osuUser.is_online ? "Online" : "Last Seen", // broken
                 // eslint-disable-next-line @typescript-eslint/naming-convention
                 icon_url: osuUser.is_online
                   ? "https://raw.githubusercontent.com/lisekilis/Replugged-Osu/main/assets/user-status-icon-online.png"
