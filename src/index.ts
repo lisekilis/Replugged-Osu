@@ -56,14 +56,12 @@ export async function start(): Promise<void> {
               color: osuUser.profile_colour
                 ? `0x${osuUser.profile_colour.split("#")[1]}`
                 : `0xff79b8`,
-              author: discordUser
-                ? {
-                    name: discordUser.username,
-                    // eslint-disable-next-line @typescript-eslint/naming-convention
-                    proxy_icon_url: `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`,
-                    url: `${window.location.origin}/users/${discordUser.id}`,
-                  }
-                : undefined,
+              author: discordUser ?? {
+                name: discordUser.username,
+                // eslint-disable-next-line @typescript-eslint/naming-convention
+                proxy_icon_url: `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`,
+                url: `${window.location.origin}/users/${discordUser.id}`,
+              },
               title: osuUser.username,
               thumbnail: {
                 url: osuUser.avatar_url, //doesn't work for some reason
@@ -88,9 +86,10 @@ export async function start(): Promise<void> {
                   inline: true,
                 },
               ],
-              timestamp: osuUser.is_online ? undefined : osuUser.last_visit,
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+              timestamp: osuUser.is_online ?? osuUser.last_visit,
               footer: {
-                text: osuUser.is_online ? "Online" : "Last Seen", //TODO: add status icons
+                text: osuUser.is_online ? "Online" : "Last Seen",
                 // eslint-disable-next-line @typescript-eslint/naming-convention
                 icon_url: osuUser.is_online
                   ? "https://raw.githubusercontent.com/lisekilis/Replugged-Osu/main/assets/user-status-icon-online.png"
