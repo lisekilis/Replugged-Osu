@@ -1,8 +1,7 @@
 import { Logger } from "replugged";
-import { Mode, User } from "./types";
+import { User } from "./types";
 const logger = Logger.plugin("Replugged-Osu");
-
-export async function getUser(userName: string, mode?: Mode): Promise<User | null> {
+export async function getUser(userName: string, mode?: string): Promise<User | null> {
   try {
     // Replace with the correct "osu!" API endpoint later
     const response = mode

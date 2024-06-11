@@ -144,4 +144,3 @@ export interface User {
   ranked_and_approved_beatmapset_count: number;
   unranked_beatmapset_count: number;
 }
-export type Mode = "fruits" | "mania" | "osu" | "taiko" | undefined;
