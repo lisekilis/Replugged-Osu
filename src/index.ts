@@ -122,22 +122,29 @@ export async function start(): Promise<void> {
                 height: 50,
               },
               url: `https://osu.ppy.sh/users/${osuUser.id}`,
-              description: `${modeNamificator(mode, true, osuUser.playmode)}`,
+              //description: `${modeNamificator(mode, true, osuUser.playmode)}`,
               fields: [
+                {
+                  name: `${modeNamificator(mode, true, osuUser.playmode)}`,
+                  inline: false,
+                },
                 {
                   name: "PP",
                   value: `${osuUser.statistics.pp}`,
                   inline: true,
                 },
                 {
-                  name: `Ranking🗺️ (${toRegionalIndicatorSymbols(osuUser.country.code)})`,
-                  value: `#${osuUser.statistics.global_rank} (#${osuUser.statistics.country_rank})`,
+                  name: `Ranking🗺️ [⛰️] (${toRegionalIndicatorSymbols(osuUser.country.code)})`,
+                  value: `#${osuUser.statistics.global_rank} [#${osuUser.rank_highest.rank}] (#${osuUser.statistics.country_rank}) `,
                   inline: true,
                 },
               ],
               timestamp: osuUser.is_online ? undefined : osuUser.last_visit,
               footer: {
                 text: osuUser.is_online ? "Online" : "Last Seen", //TODO: add status icons
+                icon_url: osuUser.is_online
+                  ? "https://tenor.com/view/niko-oneshot-ballin-teste-niko-ballin-gif-26110464"
+                  : "https://tenor.com/view/ultrakill-gif-26495714",
               },
               type: "rich",
             },
