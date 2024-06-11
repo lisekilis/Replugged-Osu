@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 export interface User {
   avatar_url: string;
   country_code: string;
@@ -44,12 +45,12 @@ export interface User {
   };
   account_history: [];
   active_tournament_banner: string;
-  badges: {
+  badges: Array<{
     awarded_at: string;
     description: string;
     image_url: string;
     url: string;
-  }[];
+  }>;
   beatmap_playcounts_count: number;
   comments_count: number;
   favourite_beatmapset_count: number;
@@ -69,10 +70,10 @@ export interface User {
   guest_beatmapset_count: number;
   loved_beatmapset_count: number;
   mapping_follower_count: number;
-  monthly_playcounts: {
+  monthly_playcounts: Array<{
     start_date: string;
     count: number;
-  }[];
+  }>;
   nominated_beatmapset_count: number;
   page: {
     html: string;
@@ -85,10 +86,10 @@ export interface User {
     updated_at: string;
   };
   ranked_beatmapset_count: number;
-  replays_watched_counts: {
+  replays_watched_counts: Array<{
     start_date: string;
     count: number;
-  }[];
+  }>;
   scores_best_count: number;
   scores_first_count: number;
   scores_pinned_count: number;
@@ -128,10 +129,10 @@ export interface User {
     };
   };
   support_level: number;
-  user_achievements: {
+  user_achievements: Array<{
     achieved_at: string;
     achievement_id: number;
-  }[];
+  }>;
   rank_history: {
     mode: string;
     data: number[];
@@ -143,3 +144,4 @@ export interface User {
   ranked_and_approved_beatmapset_count: number;
   unranked_beatmapset_count: number;
 }
+export type Mode = "fruits" | "mania" | "osu" | "taiko" | undefined;

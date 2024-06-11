@@ -1,11 +1,13 @@
 import { Logger } from "replugged";
-import { User } from "./types";
+import { Mode, User } from "./types";
 const logger = Logger.plugin("Replugged-Osu");
 
-export async function getUser(userName: string): Promise<User | null> {
+export async function getUser(userName: string, mode?: Mode): Promise<User | null> {
   try {
-    // Replace with the correct "osu!" API endpoint
-    const response = await fetch("https://api.obamabot.me/v2/osu/users?user=" + userName);
+    // Replace with the correct "osu!" API endpoint later
+    const response = mode
+      ? await fetch(`https://api.obamabot.me/v2/osu/users?user=${userName}&mode=${mode}`)
+      : await fetch(`https://api.obamabot.me/v2/osu/users?user=${userName}`);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch user data: ${response.statusText}`);
@@ -15,6 +17,6 @@ export async function getUser(userName: string): Promise<User | null> {
     return userData;
   } catch (error) {
     logger.error("Error fetching user data:", error);
-    return null; // Or handle the error differently
+    return null;
   }
 }
