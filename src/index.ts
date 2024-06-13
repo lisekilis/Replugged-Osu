@@ -56,12 +56,15 @@ export async function start(): Promise<void> {
               color: osuUser.profile_colour
                 ? `0x${osuUser.profile_colour.split("#")[1]}`
                 : `0xff79b8`,
-              author: discordUser ?? {
-                name: discordUser.username,
-                // eslint-disable-next-line @typescript-eslint/naming-convention
-                proxy_icon_url: `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`,
-                url: `${window.location.origin}/users/${discordUser.id}`,
-              },
+              author: discordUser
+                ? {
+                    name: discordUser.username,
+                    // eslint-disable-next-line @typescript-eslint/naming-convention
+                    proxy_icon_url: `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`,
+                    url: `${window.location.origin}/users/${discordUser.id}`,
+                  }
+                : // eslint-disable-next-line no-undefined
+                  undefined,
               title: osuUser.username,
               thumbnail: {
                 url: osuUser.avatar_url,
@@ -85,6 +88,14 @@ export async function start(): Promise<void> {
                   value: `(#${osuUser.statistics.global_rank}) \\<#${osuUser.rank_highest.rank}> [#${osuUser.statistics.country_rank}]`,
                   inline: true,
                 },
+                {
+                  inline: false,
+                },
+                {
+                  name: `<:GradeSSSilver:1250350159523745832>${osuUser.statistics.grade_counts.ssh}<:GradeSS:1250350158160334930>${osuUser.statistics.grade_counts.ss}<:GradeSSilver:1250350162291851285>${osuUser.statistics.grade_counts.sh}<:GradeS:1250350160836431922>${osuUser.statistics.grade_counts.s}<:GradeA:1250350163583827988>${osuUser.statistics.grade_counts.a}`,
+                  value: "Scores",
+                  inline: true,
+                },
               ],
               // eslint-disable-next-line no-undefined
               timestamp: osuUser.is_online ? undefined : osuUser.last_visit,
@@ -92,8 +103,8 @@ export async function start(): Promise<void> {
                 text: osuUser.is_online ? "Online" : "Last Seen",
                 // eslint-disable-next-line @typescript-eslint/naming-convention
                 icon_url: osuUser.is_online
-                  ? "https://raw.githubusercontent.com/lisekilis/Replugged-Osu/main/assets/user-status-icon-online.png"
-                  : "https://raw.githubusercontent.com/lisekilis/Replugged-Osu/main/assets/user-status-icon-offline.png",
+                  ? "https://raw.githubusercontent.com/lisekilis/Replugged-Osu/main/assets/status-icons/user-status-icon-online.png"
+                  : "https://raw.githubusercontent.com/lisekilis/Replugged-Osu/main/assets/status-icons/user-status-icon-offline.png",
               },
               type: "rich",
             },
