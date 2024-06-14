@@ -25,7 +25,7 @@ export async function start(): Promise<void> {
         required: false,
       },
     ],
-    executor: async (interaction) => {
+    async executor(interaction) {
       const userName = interaction.getValue("User");
       const mode = modeNameFormatter(interaction.getValue("Mode"));
       let osuUser;
@@ -54,8 +54,8 @@ export async function start(): Promise<void> {
           embeds: [
             {
               color: osuUser.profile_colour
-                ? `0x${osuUser.profile_colour.split("#")[1]}`
-                : `0xff79b8`,
+                ? Number(`0x${osuUser.profile_colour.split("#")[1]}`)
+                : 0xff79b8,
               author: discordUser
                 ? {
                     name: discordUser.username,
@@ -89,11 +89,12 @@ export async function start(): Promise<void> {
                   inline: true,
                 },
                 {
-                  inline: false,
+                  name,
+                  value: "",
+                  inline: false, // this is here as an endl cuz i'm dumb
                 },
                 {
                   name: `<:GradeSSSilver:1250350159523745832>${osuUser.statistics.grade_counts.ssh}<:GradeSS:1250350158160334930>${osuUser.statistics.grade_counts.ss}<:GradeSSilver:1250350162291851285>${osuUser.statistics.grade_counts.sh}<:GradeS:1250350160836431922>${osuUser.statistics.grade_counts.s}<:GradeA:1250350163583827988>${osuUser.statistics.grade_counts.a}`,
-                  value: "Scores",
                   inline: true,
                 },
               ],
