@@ -4,7 +4,7 @@ import { getRegionalFlag, modeNameFormatter } from "./functions";
 
 const inject = new Injector();
 const logger = Logger.plugin("Replugged-Osu");
-const { ApplicationCommandOptionType } = types;
+const { ApplicationCommandOptionType, MessageEmbedTypes } = types;
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export async function start(): Promise<void> {
@@ -76,6 +76,7 @@ export async function start(): Promise<void> {
               fields: [
                 {
                   name: `${modeNameFormatter(mode, true, osuUser.playmode)}`,
+                  value: ``,
                   inline: false,
                 },
                 {
@@ -89,13 +90,9 @@ export async function start(): Promise<void> {
                   inline: true,
                 },
                 {
-                  name,
+                  name: `<:GradeSSSilver:1252207084204855346> ${osuUser.statistics.grade_counts.ssh} | <:GradeSS:1252207082552164353> ${osuUser.statistics.grade_counts.ss} | <:GradeSSilver:1252207055486451763> ${osuUser.statistics.grade_counts.sh} | <:GradeS:1252207053611470900> ${osuUser.statistics.grade_counts.s} | <:GradeA:1252207052344791060> ${osuUser.statistics.grade_counts.a}`,
                   value: "",
-                  inline: false, // this is here as an endl cuz i'm dumb
-                },
-                {
-                  name: `<:GradeSSSilver:1250350159523745832>${osuUser.statistics.grade_counts.ssh}<:GradeSS:1250350158160334930>${osuUser.statistics.grade_counts.ss}<:GradeSSilver:1250350162291851285>${osuUser.statistics.grade_counts.sh}<:GradeS:1250350160836431922>${osuUser.statistics.grade_counts.s}<:GradeA:1250350163583827988>${osuUser.statistics.grade_counts.a}`,
-                  inline: true,
+                  inline: false,
                 },
               ],
               // eslint-disable-next-line no-undefined
@@ -107,7 +104,7 @@ export async function start(): Promise<void> {
                   ? "https://raw.githubusercontent.com/lisekilis/Replugged-Osu/main/assets/status-icons/user-status-icon-online.png"
                   : "https://raw.githubusercontent.com/lisekilis/Replugged-Osu/main/assets/status-icons/user-status-icon-offline.png",
               },
-              type: "rich",
+              type: MessageEmbedTypes.RICH,
             },
           ],
         };
