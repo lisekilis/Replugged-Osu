@@ -76,7 +76,7 @@ export async function start(): Promise<void> {
               fields: [
                 {
                   name: `${modeNameFormatter(mode, true, osuUser.playmode)}`,
-                  value: `${osuUser.title}`,
+                  value: `${osuUser.title ?? " "}`,
                   inline: false,
                 },
                 {

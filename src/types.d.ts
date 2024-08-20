@@ -30,7 +30,7 @@ export interface User {
   playstyle: string;
   post_count: number;
   profile_order: string[];
-  title: string;
+  title: string?;
   title_url: string;
   twitter: string;
   website: string;
