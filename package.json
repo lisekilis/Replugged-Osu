@@ -1,6 +1,6 @@
 {
   "name": "Replugged-Osu",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "A plugin that allows you to get osu information",
   "engines": {
     "node": ">=20.0.0",
