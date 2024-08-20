@@ -1,6 +1,6 @@
 {
   "id": "dev.lisekilis.RepluggedOsu",
-  "name": "Replugged Osu",
+  "name": "Replugged-Osu",
   "description": "A plugin that allows you to get osu information",
   "author": {
     "name": "lisekilis",
@@ -9,12 +9,12 @@
   },
   "version": "1.0.0",
   "updater": {
-    "type": "github",
-    "id": "replugged-org/plugin-template"
+    "type": "store",
+    "id": "dev.lisekilis.RepluggedOsu"
   },
   "license": "MIT",
   "type": "replugged-plugin",
   "renderer": "src/index.ts",
   "source": "https://github.com/lisekilis/Replugged-Osu",
-  "image": ["http://scheibo.com"]
+  "image": ["https://i.imgur.com/tbJmZCx.png"]
 }
