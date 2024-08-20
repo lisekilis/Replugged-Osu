@@ -35,7 +35,7 @@ export async function start(): Promise<void> {
         logger.error("Error fetching user:", error);
         return {
           send: false,
-          result: "Encoutered an error while fetching user!",
+          result: "Encountered an error while fetching user!",
         };
       }
       const discordUser = osuUser?.discord
