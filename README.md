@@ -1,11 +1,6 @@
-# Replugged plugin template
+# Replugged-Osu
 
-See the [plugin development guide](https://guide.replugged.dev/docs/plugins/getting-started) for
-more information on using this template.
+## A plugin that allows you to lookup Osu! user stats using a slash command `/osuUser`
+![preview](https://i.imgur.com/tbJmZCx.png)
 
-# License
-
-The [plugin template](https://github.com/replugged-org/plugin-template) is licensed under the
-[MIT](https://opensource.org/license/mit/) license. However, addons using this template are not
-necessarily licensed under MIT. Developers are encouraged to add a license file to their repository,
-but if none exists, the repository should be considered as unlicensed.
+install: https://replugged.dev/install?identifier=dev.lisekilis.RepluggedOsu
