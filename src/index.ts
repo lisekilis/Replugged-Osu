@@ -28,26 +28,25 @@ export async function start(): Promise<void> {
     async executor(interaction) {
       const userName = interaction.getValue("User");
       const mode = modeNameFormatter(interaction.getValue("Mode"));
-      let osuUser;
       try {
-        osuUser = await osuAPI.getUser(userName, mode);
-      } catch (error) {
-        logger.error("Error fetching user:", error);
-        return {
-          send: false,
-          result: "Encountered an error while fetching user!",
-        };
-      }
-      const discordUser = osuUser?.discord
-        ? common.users.findByTag(osuUser.discord.split("#")[0])
-        : null;
+        const { user: osuUser, status } = await osuAPI.getUser(userName, mode);
+        if (status === 404)
+          return {
+            send: false,
+            result: `User **${userName}** not found!`,
+          };
 
-      if (!osuUser)
-        return {
-          send: false,
-          result: `User **${userName}** not found!`,
-        };
-      else {
+        if (!osuUser)
+          return {
+            send: false,
+            result:
+              "Encountered an error while fetching user! \n-# Check the console for more info",
+          };
+
+        const discordUser = osuUser.discord
+          ? common.users.findByTag(osuUser.discord.split("#")[0])
+          : null;
+
         return {
           send: false,
           result: null,
@@ -107,6 +106,12 @@ export async function start(): Promise<void> {
               type: MessageEmbedTypes.RICH,
             },
           ],
+        };
+      } catch (error) {
+        logger.error("Error fetching user:", error);
+        return {
+          send: false,
+          result: "Encountered an error while fetching user! \n-# Check the console for more info",
         };
       }
     },

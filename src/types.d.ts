@@ -1,4 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+export interface GetUserResult {
+  user: User | null;
+  status: number;
+}
 export interface User {
   avatar_url: string;
   country_code: string;
