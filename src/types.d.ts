@@ -33,6 +33,7 @@ export interface User {
   playmode: string;
   playstyle: string;
   post_count: number;
+  profile_hue: number;
   profile_order: string[];
   title: string?;
   title_url: string;
